@@ -1,21 +1,30 @@
-name: Bootstrap Backend
+name: Bootstrap Validation
 
 on:
-  workflow_dispatch:
 
-permissions:
-  id-token: write
-  contents: read
+  pull_request:
+
+    branches:
+
+      - main
+
+    paths:
+
+      - bootstrap/**
 
 jobs:
 
-  bootstrap:
+  validate:
 
     runs-on: ubuntu-latest
 
     defaults:
       run:
         working-directory: bootstrap
+
+    permissions:
+      id-token: write
+      contents: read
 
     env:
       ARM_USE_OIDC: true
@@ -37,7 +46,9 @@ jobs:
 
       - run: terraform init
 
+      - run: terraform fmt -check
+
       - run: terraform validate
 
-      - run: terraform apply -auto-approve \
+      - run: terraform plan \
           -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"

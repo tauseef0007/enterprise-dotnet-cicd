@@ -1,6 +1,12 @@
 name: Bootstrap Backend
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'bootstrap/**'
+
   workflow_dispatch:
 
 permissions:
@@ -8,7 +14,6 @@ permissions:
   contents: read
 
 jobs:
-
   bootstrap:
 
     runs-on: ubuntu-latest
@@ -35,9 +40,14 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v3
 
-      - run: terraform init
+      - name: Terraform Init
+        run: terraform init
 
-      - run: terraform validate
+      - name: Terraform Validate
+        run: terraform validate
 
-      - run: terraform apply -auto-approve \
-          -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+      - name: Terraform Plan
+        run: terraform plan -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
