@@ -14,12 +14,18 @@ variable "environment" {
   default = "dev"
 }
 
-variable "admin_username" {
-  type = string
+
+
+variable "name" {
+  description = "Resource Group Name"
+  type        = string
 }
 
-variable "admin_password" {
-  type      = string
-  sensitive = true
-}
 
+
+variable "tags" {
+  description = "Resource Group Tags"
+  type        = map(string)
+
+  default = {}
+}
