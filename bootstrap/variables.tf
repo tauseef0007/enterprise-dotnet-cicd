@@ -1,7 +1,17 @@
-variable "location" {}
+variable "subscription_id" {}
 
-variable "resource_group_name" {}
+variable "location" {
+  default = "Central India"
+}
 
-variable "storage_account_name" {}
+variable "resource_group_name" {
+  default = "rg-tfstate-prod"
+}
 
-variable "container_name" {}
+variable "storage_account_name" {
+  default = "sttauseeftfstate01"
+}
+
+variable "container_name" {
+  default = "tfstate"
+}
