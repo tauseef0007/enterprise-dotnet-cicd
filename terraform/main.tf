@@ -1,20 +1,3 @@
-module "windows_vm" {
-
-  source = "./modules/windows-vm"
-
-  vm_name             = "vm-enterprise-dev"
-  location            = module.resource_group.resource_group_location
-  resource_group_name = module.resource_group.resource_group_name
-
-  subnet_id    = module.network.app_subnet_id
-  public_ip_id = module.network.public_ip_id
-
-  vm_size = "Standard_B2s"
-
-  admin_username = var.admin_username
-  admin_password = var.admin_password
-}
-
 module "resource_group" {
 
   source = "./modules/resource-group"
@@ -25,4 +8,22 @@ module "resource_group" {
 
   tags = local.common_tags
 
+}
+
+module "network" {
+
+  source = "./modules/network"
+
+  resource_group_name = module.resource_group.name
+  location            = module.resource_group.location
+
+  vnet_name = "vnet-${var.project_name}-${var.environment}"
+  vnet_cidr = "10.10.0.0/16"
+
+  app_subnet_name = "snet-app"
+  app_subnet_cidr = "10.10.1.0/24"
+
+  public_ip_name = "pip-${var.project_name}-${var.environment}"
+
+  tags = local.common_tags
 }
