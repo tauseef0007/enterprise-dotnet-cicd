@@ -23,14 +23,3 @@ variable "admin_password" {
   sensitive = true
 }
 
-variable "project_name" {
-  type = string
-}
-
-variable "environment" {
-  type = string
-}
-
-variable "location" {
-  type = string
-}
