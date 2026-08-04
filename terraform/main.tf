@@ -14,3 +14,15 @@ module "windows_vm" {
   admin_username = var.admin_username
   admin_password = var.admin_password
 }
+
+module "resource_group" {
+
+  source = "./modules/resource-group"
+
+  name = "rg-${var.project_name}-${var.environment}"
+
+  location = var.location
+
+  tags = local.common_tags
+
+}
