@@ -41,7 +41,7 @@ resource "azurerm_windows_virtual_machine" "this" {
 
   provision_vm_agent = true
 
- 
+
 
   patch_mode = "AutomaticByOS"
 
