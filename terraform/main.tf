@@ -6,7 +6,7 @@ module "resource_group" {
 
   location = var.location
 
-  tags = local.common_tags
+ 
 
 }
 
