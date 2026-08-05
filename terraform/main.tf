@@ -66,7 +66,7 @@ module "windows_vm" {
 
   public_ip_id = module.network.public_ip_id
 
-  vm_size = "Standard_B2s"
+  vm_size = "Standard_D2s_v3"
 
   admin_username = var.admin_username
 
