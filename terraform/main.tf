@@ -27,3 +27,44 @@ module "network" {
 
   tags = local.common_tags
 }
+
+
+
+module "nsg" {
+
+  source = "./modules/nsg"
+
+  nsg_name = "nsg-${var.project_name}-${var.environment}"
+
+  resource_group_name = module.resource_group.name
+
+  location = module.resource_group.location
+
+  subnet_id = module.network.app_subnet_id
+
+  tags = local.common_tags
+}
+
+module "windows_vm" {
+
+  source = "./modules/windows-vm"
+
+  vm_name = "vm-${var.project_name}-${var.environment}"
+
+  location = module.resource_group.location
+
+  resource_group_name = module.resource_group.name
+
+  subnet_id = module.network.app_subnet_id
+
+  public_ip_id = module.network.public_ip_id
+
+  vm_size = "Standard_B2s"
+
+  admin_username = var.admin_username
+
+  admin_password = var.admin_password
+
+  tags = local.common_tags
+
+}
