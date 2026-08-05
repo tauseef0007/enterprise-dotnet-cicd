@@ -3,29 +3,24 @@ variable "subscription_id" {
 }
 
 variable "location" {
-  default = "Central India"
+  type = string
 }
 
 variable "project_name" {
-  default = "enterprise-bank"
+  type = string
 }
 
 variable "environment" {
-  default = "dev"
+  type = string
 }
 
 
 
-variable "name" {
-  description = "Resource Group Name"
-  type        = string
+variable "admin_username" {
+  type = string
 }
 
-
-
-variable "tags" {
-  description = "Resource Group Tags"
-  type        = map(string)
-
-  default = {}
+variable "admin_password" {
+  type      = string
+  sensitive = true
 }
