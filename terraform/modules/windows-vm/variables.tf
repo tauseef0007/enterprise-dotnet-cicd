@@ -34,3 +34,7 @@ variable "admin_password" {
 variable "tags" {
   type = map(string)
 }
+
+variable "computer_name" {
+  type = string
+}

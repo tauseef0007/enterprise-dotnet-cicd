@@ -49,7 +49,14 @@ module "windows_vm" {
 
   source = "./modules/windows-vm"
 
-  vm_name = "vm-${var.project_name}-${var.environment}"
+  depends_on = [
+    module.resource_group,
+    module.network,
+    module.nsg
+  ]
+
+  vm_name       = "vm-${var.project_name}-${var.environment}"
+  computer_name = "winvm01"
 
   location = module.resource_group.location
 
