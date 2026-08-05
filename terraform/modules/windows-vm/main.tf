@@ -21,7 +21,8 @@ resource "azurerm_network_interface" "this" {
 
 resource "azurerm_windows_virtual_machine" "this" {
 
-  name = var.vm_name
+  name          = var.vm_name
+  computer_name = var.computer_name
 
   location = var.location
 
