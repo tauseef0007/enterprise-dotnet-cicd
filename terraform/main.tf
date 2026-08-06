@@ -6,7 +6,10 @@ module "resource_group" {
 
   location = var.location
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> 77a15b98cfda52781e0eb33af55daa5191a8e0cf
 
 }
 

@@ -77,3 +77,22 @@ resource "azurerm_windows_virtual_machine" "this" {
 
   tags = var.tags
 }
+
+resource "azurerm_virtual_machine_extension" "iis" {
+
+  name                 = "Install-IIS"
+  virtual_machine_id   = azurerm_windows_virtual_machine.this.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.10"
+
+  settings = <<SETTINGS
+{
+  "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-WindowsFeature -Name Web-Server -IncludeManagementTools"
+}
+SETTINGS
+
+  depends_on = [
+    azurerm_windows_virtual_machine.this
+  ]
+}
